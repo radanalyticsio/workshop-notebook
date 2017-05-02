@@ -20,6 +20,8 @@ ADD pyspark.ipynb /notebooks/pyspark.ipynb
 
 USER root
 
+ADD start.sh /start.sh
+
 RUN chown -R $NB_USER:root /home/$NB_USER /data \
     && find /home/$NB_USER -type d -exec chmod g+rwx,o+rx {} \; \
     && find /home/$NB_USER -type f -exec chmod g+rw {} \; \
