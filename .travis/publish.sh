@@ -1,6 +1,11 @@
 #!/bin/bash
 
-_results_file="./all-results.perf"
+_results_file="./all.perf"
+
+# debug only
+echo "I am working"
+echo "TRAVIS_PULL_REQUEST=$TRAVIS_PULL_REQUEST"
+echo `ls $_results_file`
 
 if [ -n "$TRAVIS_PULL_REQUEST" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ -f "$_results_file" ]; then
   echo -e "Commenting on PR with the results"
