@@ -16,6 +16,7 @@ ADD msgs.parquet /data/msgs.parquet
 ADD var.ipynb /notebooks/var.ipynb
 ADD pyspark.ipynb /notebooks/pyspark.ipynb
 ADD ml-basics.ipynb /notebooks/ml-basics.ipynb
+ADD operationalizing.ipynb /notebooks/operationalizing.ipynb
 ADD auto-mpg.json /notebooks/data/
 
 USER root
@@ -25,7 +26,9 @@ RUN chown -R $NB_USER:root /home/$NB_USER /data \
     && find /home/$NB_USER -type f -exec chmod g+rw {} \; \
     && find /data -type d -exec chmod g+rwx,o+rx {} \; \
     && find /data -type f -exec chmod g+rw {} \; \
-    && chmod -f g+rw /notebooks/*
+    && chmod -f g+rw /notebooks/* \
+    && $CONDA_DIR/bin/conda install --quiet --yes python=$NB_PYTHON_VER tensorflow \
+    && conda clean -tipsy
 
 USER $NB_UID
 ENV HOME /home/$NB_USER
